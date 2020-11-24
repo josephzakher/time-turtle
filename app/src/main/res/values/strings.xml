@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Time Turtle</string>
+    <string name="task_event">Add a task or an event</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="add">Add</string>
 </resources>
