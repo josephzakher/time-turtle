@@ -17,7 +17,7 @@ public class DataBaseManager {
     private static final DataBaseManager instance = new DataBaseManager();
     private DataBaseConnector databaseConnector;
 
-    private DataBaseManager() {
+    public DataBaseManager() {
         databaseConnector = new DataBaseConnector(AppController.getInstance().getApplicationContext());
     }
 
@@ -37,7 +37,7 @@ public class DataBaseManager {
 //        Calendar c = Calendar.getInstance();
 //        System.out.println("Current time => "+c.getTime());
         String startDateStr = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(startDate);
-        String endDateStr = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(startDate);
+        String endDateStr = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(endDate);
         SQLiteDatabase db = databaseConnector.getWritableDatabase();
         ContentValues taskValues = new ContentValues();
         taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_STARTDATE,startDateStr);
