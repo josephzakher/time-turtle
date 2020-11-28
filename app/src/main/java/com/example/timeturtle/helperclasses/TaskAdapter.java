@@ -1,10 +1,9 @@
 package com.example.timeturtle.helperclasses;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,7 @@ import com.example.timeturtle.R;
 
 import java.util.ArrayList;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private ArrayList<Task> tasks;
 
     //Inner class to define a ViewHolder that holds a CardView object
@@ -26,12 +25,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             cardView = cv;
         }
     }
-//Constructor of this class needs two arrays for images and captions
 
-    public EventAdapter(ArrayList<Task> tasks) {
+    public TaskAdapter(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-
 
     @NonNull
     @Override
@@ -48,13 +45,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder viewHolder, int
             position) {
         CardView cardView = viewHolder.cardView;
-//        ImageView imageView = cardView.findViewById(R.id.icon);
-//        imageView.setImageResource(tasks[position].getIconID());
-//        imageView.setContentDescription(tasks[position].getName());
+        //ImageView imageView = cardView.findViewById(R.id.icon);
+        //imageView.setImageResource(tasks[position].getIconID());
+        //imageView.setContentDescription(tasks[position].getName());
         TextView textView = cardView.findViewById(R.id.task_text);
         textView.setText(tasks.get(position).getName());
         TextView timeView = cardView.findViewById(R.id.date);
-        timeView.setText(tasks.get(position).getStartDate());
+        timeView.setText(tasks.get(position).getDate());
         TextView descriptionTextView = cardView.findViewById(R.id.description);
         descriptionTextView.setText(tasks.get(position).getDescription());
     }
@@ -64,4 +61,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public int getItemCount() {
         return tasks.size();
     }
+
 }

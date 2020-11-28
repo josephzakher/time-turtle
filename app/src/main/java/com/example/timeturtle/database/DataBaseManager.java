@@ -25,25 +25,13 @@ public class DataBaseManager {
         return instance;
     }
 
-//    public ArrayList<Task> getAllTasks() {
-//        return databaseConnector.getAllTasks();
-//    }
-//
-//    public void setTask(Date startDate, Date endDate, String name, String description) {
-//        databaseConnector.insertTask(startDate, endDate,name,description);
-//    }
-
-    public void insertTask(Date startDate, Date endDate, String name, String description){
-//        Calendar c = Calendar.getInstance();
-//        System.out.println("Current time => "+c.getTime());
-        String startDateStr = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(startDate);
-        String endDateStr = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(endDate);
+    public void insertTask(Task task){
         SQLiteDatabase db = databaseConnector.getWritableDatabase();
         ContentValues taskValues = new ContentValues();
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_STARTDATE,startDateStr);
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_ENDDATE,endDateStr);
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_NAME,name);
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_DESCRIPTION,description);
+        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_DATE,task.getDate());
+        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_TIME,task.getTime());
+        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_NAME,task.getName());
+        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_DESCRIPTION,task.getDescription());
         db.insert( DataBaseContract.DataBaseEntry.TABLE_NAME,null,taskValues);
     }
     public ArrayList<Task> getAllTasks() {
@@ -56,7 +44,6 @@ public class DataBaseManager {
             if (cursor.moveToFirst()) {
                 do {
                     Task task = new Task(
-                            cursor.getInt(0),
                             cursor.getString(1),
                             cursor.getString(2),
                             cursor.getString(3),
