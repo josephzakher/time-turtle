@@ -2,38 +2,23 @@ package com.example.timeturtle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
-
-import com.example.timeturtle.database.DataBaseManager;
-import com.example.timeturtle.helperclasses.Task;
-import com.example.timeturtle.helperclasses.TaskAdapter;
 import com.google.android.material.navigation.NavigationView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity {
-    TaskFragment taskFragment = new TaskFragment();
+    TasksDatesFragment tasksDatesFragment = new TasksDatesFragment();
     AddTaskFragment addTaskFragment = new AddTaskFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    TaskFragment taskFragment = new TaskFragment();
 
     private static final String TAG = "MainActivity";
 
@@ -41,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ft.replace(R.id.content_frame, taskFragment);
+        taskFragment.fetchTasksFromDB();
+        ft.add(R.id.content_frame, tasksDatesFragment);
+        ft.add(R.id.content_frame, taskFragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.addToBackStack(null);
         ft.commit();
@@ -63,14 +49,30 @@ public class MainActivity extends AppCompatActivity {
                         navigationView.getMenu().getItem(0).setChecked(true);
                         navigationView.getMenu().getItem(1).setChecked(false);
                         ft = getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_frame, taskFragment);
+                        taskFragment.fetchTasksFromDB();
+                        if (ft != null && tasksDatesFragment.isVisible() && taskFragment.isVisible()) {
+                            ft.remove(tasksDatesFragment);
+                            ft.remove(taskFragment);
+                            ft.add(R.id.content_frame, tasksDatesFragment);
+                            ft.add(R.id.content_frame, taskFragment);
+                        } else {
+                            ft.remove(addTaskFragment);
+                            ft.add(R.id.content_frame, tasksDatesFragment);
+                            ft.add(R.id.content_frame, taskFragment);
+                        }
                         ft.commit();
                         return true;
                     case nav_add:
                         navigationView.getMenu().getItem(0).setChecked(false);
                         navigationView.getMenu().getItem(1).setChecked(true);
                         ft = getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_frame, addTaskFragment);
+
+                        if (ft != null && addTaskFragment.isVisible()) {
+                        } else {
+                            ft.remove(tasksDatesFragment);
+                            ft.remove(taskFragment);
+                            ft.add(R.id.content_frame, addTaskFragment);
+                        }
                         ft.commit();
                     default:
                         return false;
@@ -104,10 +106,22 @@ public class MainActivity extends AppCompatActivity {
         ft = getSupportFragmentManager().beginTransaction();
         if (ft != null && addTaskFragment.isVisible()) {
             addTaskFragment.addTaskInDB();
-            ft.replace(R.id.content_frame, taskFragment);
+            taskFragment.fetchTasksFromDB();
+            ft.remove(addTaskFragment);
+            ft.add(R.id.content_frame, tasksDatesFragment);
+            ft.add(R.id.content_frame, taskFragment);
         } else {
-            ft.replace(R.id.content_frame, addTaskFragment);
+            ft.remove(tasksDatesFragment);
+            ft.remove(taskFragment);
+            ft.add(R.id.content_frame, addTaskFragment);
         }
+        ft.commit();
+    }
+    public void testing(String dates){
+        taskFragment.fetchTasksFromDBDependentOnDate(dates);
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(taskFragment);
+        ft.add(R.id.content_frame, taskFragment);
         ft.commit();
     }
 

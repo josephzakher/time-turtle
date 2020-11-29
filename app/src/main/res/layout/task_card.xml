@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="125dp"
@@ -11,18 +10,17 @@
     app:elevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="7:00"
+            android:hint="@string/_7_00"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#FF757575"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,10 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/task_event"
+            android:hint="@string/task_event"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/date"
+            app:layout_constraintTop_toBottomOf="@+id/time"
             app:layout_constraintStart_toStartOf="parent"
              />
 
@@ -59,7 +57,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginVertical="5dp"
-            android:text="This is the description of the event"
+            android:hint="@string/this_is_the_description_of_the_event"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="#FF757575"
             app:layout_constraintTop_toBottomOf="@+id/task_text"

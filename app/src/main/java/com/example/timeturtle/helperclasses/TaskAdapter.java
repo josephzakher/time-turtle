@@ -35,7 +35,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup
                                                  viewGroup, int viewType) {
         CardView cv = (CardView) LayoutInflater.from(viewGroup.
-                getContext()).inflate(R.layout.event_card, viewGroup, false);
+                getContext()).inflate(R.layout.task_card, viewGroup, false);
         return new ViewHolder(cv);
     }
 
@@ -50,8 +50,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         //imageView.setContentDescription(tasks[position].getName());
         TextView textView = cardView.findViewById(R.id.task_text);
         textView.setText(tasks.get(position).getName());
-        TextView timeView = cardView.findViewById(R.id.date);
-        timeView.setText(tasks.get(position).getDate());
+        TextView timeView = cardView.findViewById(R.id.time);
+        timeView.setText(tasks.get(position).getTime());
         TextView descriptionTextView = cardView.findViewById(R.id.description);
         descriptionTextView.setText(tasks.get(position).getDescription());
     }

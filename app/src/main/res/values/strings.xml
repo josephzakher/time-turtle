@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Time Turtle</string>
-    <string name="task_event">Add a task or an event</string>
+    <string name="task_event">Task/Event</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="add">Add</string>
@@ -12,6 +12,9 @@
     <string name="add_task">Add Task</string>
     <string name="addTaskException">Please add a name and a date to create a new task</string>
     <string name="addTaskSuccess">Task added!</string>
+    <string name="this_is_the_description_of_the_event">This is the description of the event</string>
+    <string name="_7_00">7:00</string>
+    <string name="_26">26</string>
 </resources>
 
 

@@ -91,7 +91,7 @@ public class AddTaskFragment extends Fragment {
     }
 
     private void updateDate() {
-        String myFormat = "MM/dd/yyyy";
+        String myFormat = "MMM\ndd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
         textViewDate.setText(sdf.format(calendar.getTime()));
     }
