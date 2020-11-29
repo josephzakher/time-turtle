@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/nav_home"
+        android:checked="false"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home"/>
 <!--        android:checked="true"-->
@@ -10,6 +11,7 @@
 
     <item
         android:id="@+id/nav_add"
+        android:checked="false"
         android:icon="@drawable/ic_baseline_add_24"
         android:title="Add new event" />
 

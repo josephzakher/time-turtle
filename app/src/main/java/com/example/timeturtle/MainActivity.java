@@ -2,6 +2,7 @@ package com.example.timeturtle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,11 +31,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
     TaskFragment taskFragment = new TaskFragment();
     AddTaskFragment addTaskFragment = new AddTaskFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     private static final String TAG = "MainActivity";
 
@@ -50,34 +49,32 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
-
+        navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                menuItem.setChecked(true);
+                final int nav_home = R.id.nav_home;
+                final int nav_add = R.id.nav_add;
+                setTitle(menuItem.getTitle());
                 drawerLayout.closeDrawers();
                 FragmentTransaction ft;
-
                 switch (menuItem.getItemId()) {
-                    case R.id.nav_home:
+                    case nav_home:
+                        navigationView.getMenu().getItem(0).setChecked(true);
+                        navigationView.getMenu().getItem(1).setChecked(false);
                         ft = getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_frame, taskFragment);
                         ft.commit();
-                    case R.id.nav_add:
+                        return true;
+                    case nav_add:
+                        navigationView.getMenu().getItem(0).setChecked(false);
+                        navigationView.getMenu().getItem(1).setChecked(true);
                         ft = getSupportFragmentManager().beginTransaction();
-//                        if (ft != null && addTaskFragment.isVisible()) {
-//                            ft.detach(taskFragment);
-//                            ft.attach(addTaskFragment);
-//                    }else{
                         ft.replace(R.id.content_frame, addTaskFragment);
                         ft.commit();
-//                }
-                default:
-                        ft = getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_frame, taskFragment);
-                        ft.commit();
+                    default:
+                        return false;
                 }
-                return false;
             }
         });
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
@@ -107,10 +104,11 @@ public class MainActivity extends AppCompatActivity {
         ft = getSupportFragmentManager().beginTransaction();
         if (ft != null && addTaskFragment.isVisible()) {
             addTaskFragment.addTaskInDB();
+            ft.replace(R.id.content_frame, taskFragment);
         } else {
             ft.replace(R.id.content_frame, addTaskFragment);
-            ft.commit();
         }
+        ft.commit();
     }
 
 }

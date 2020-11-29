@@ -37,8 +37,8 @@ public class TaskFragment extends Fragment {
         return taskRecycler;
     }
 
-    public void add(Task task) {
-        tasks.add(0, task);
-        taskAdapter.notifyItemInserted(0);
-    }
+//    public void add(Task task) {
+//        tasks.add(0, task);
+//        taskAdapter.notifyItemInserted(0);
+//    }
 }

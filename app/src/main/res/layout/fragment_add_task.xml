@@ -44,7 +44,7 @@
             android:gravity="center"
             android:fontFamily="Roboto"
             android:textSize="25sp"
-            android:text="Start Date"
+            android:hint="Date"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/time"
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:fontFamily="Roboto"
             android:textSize="25sp"
-            android:text="Time"
+            android:hint="Time"
             android:layout_weight="1"/>
     </LinearLayout>
 

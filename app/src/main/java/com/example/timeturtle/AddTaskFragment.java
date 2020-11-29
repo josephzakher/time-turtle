@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 
+import com.example.timeturtle.controllers.AppController;
 import com.example.timeturtle.database.DataBaseManager;
 import com.example.timeturtle.helperclasses.Task;
 
@@ -23,12 +26,12 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class AddTaskFragment extends Fragment {
+    private static final String TAG = "AddTaskFragment" ;
     final Calendar calendar = Calendar.getInstance();
     TextView textViewDate;
     TextView textViewTime;
     EditText editTextName;
     EditText editTextDescription;
-    TaskFragment taskFragment = new TaskFragment();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,9 +97,16 @@ public class AddTaskFragment extends Fragment {
     }
 
     public void addTaskInDB() {
+        if(textViewDate.getText().toString()!="" && editTextName.getText().toString() != "" ){
         DataBaseManager db = new DataBaseManager();
         Task task = new Task(textViewDate.getText().toString(), textViewTime.getText().toString(), editTextName.getText().toString(), editTextDescription.getText().toString());
         db.insertTask(task);
+//        TaskFragment taskFragment = new TaskFragment();
 //        taskFragment.add(task);
+            Toast.makeText(AppController.getInstance(), getResources().getString(R.string.addTaskSuccess), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(AppController.getInstance(), getResources().getString(R.string.addTaskException), Toast.LENGTH_SHORT).show();
+        }
     }
 }
