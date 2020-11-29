@@ -1,13 +1,17 @@
 package com.example.timeturtle.helperclasses;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +20,11 @@ import com.example.timeturtle.R;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 
 public class TasksDatesAdapter  extends RecyclerView.Adapter<TasksDatesAdapter.DatesViewHolder> {
-    private ArrayList<String> dates;
+    private ArrayList<DateElement> dateElements;
     private Context mContext;
     //Inner class to define a ViewHolder that holds a CardView object
     public static class DatesViewHolder extends RecyclerView.
@@ -31,8 +37,8 @@ public class TasksDatesAdapter  extends RecyclerView.Adapter<TasksDatesAdapter.D
         }
     }
 
-    public TasksDatesAdapter(ArrayList<String> dates,Context context) {
-        this.dates = dates;
+    public TasksDatesAdapter(ArrayList<DateElement> dateElements, Context context) {
+        this.dateElements = dateElements;
         this.mContext = context;
     }
 
@@ -47,18 +53,31 @@ public class TasksDatesAdapter  extends RecyclerView.Adapter<TasksDatesAdapter.D
 
     //onBindViewHolder will be called repeatedly for each ViewHolder object
 
+//    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(TasksDatesAdapter.DatesViewHolder viewHolder, int
             position) {
         CardView cardView = viewHolder.cardView;
         TextView textView = cardView.findViewById(R.id.card_date);
-        textView.setText(dates.get(position));
+        textView.setText(dateElements.get(position).getDate());
+        if(dateElements.get(position).getSelected()){
+            Log.d(TAG, "onBindViewHolder: "+"selected");
+//            final int color = R.color.purple_500;
+            cardView.setCardBackgroundColor(Color.rgb(47,62,158));
+            textView.setTextColor(Color.WHITE);
+        }
+        else
+        {
+            Log.d(TAG, "onBindViewHolder: "+"not selected");
+            cardView.setCardBackgroundColor(Color.WHITE);
+            textView.setTextColor(Color.BLACK);
+        }
         cardView.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 if (mContext instanceof MainActivity) {
-                    ((MainActivity)mContext).testing(dates.get(position));
-                        cardView.setCardBackgroundColor(Color.RED);
+                    ((MainActivity)mContext).switchBetweenDateFragment(dateElements.get(position).getDate(),position);
                 }
             }
         });
@@ -66,7 +85,7 @@ public class TasksDatesAdapter  extends RecyclerView.Adapter<TasksDatesAdapter.D
     //how many items are we displaying?
     @Override
     public int getItemCount() {
-        return dates.size();
+        return dateElements.size();
     }
 
 }

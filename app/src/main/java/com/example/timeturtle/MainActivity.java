@@ -1,10 +1,12 @@
 package com.example.timeturtle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -117,8 +119,10 @@ public class MainActivity extends AppCompatActivity {
         }
         ft.commit();
     }
-    public void testing(String dates){
-        taskFragment.fetchTasksFromDBDependentOnDate(dates);
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void switchBetweenDateFragment(String date, int position){
+        taskFragment.fetchTasksFromDBDependentOnDate(date);
+        tasksDatesFragment.updateSelected(position);
         ft = getSupportFragmentManager().beginTransaction();
         ft.remove(taskFragment);
         ft.add(R.id.content_frame, taskFragment);
