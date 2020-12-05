@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.timeturtle.database.DataBaseManager;
 import com.example.timeturtle.helperclasses.InitApplication;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -30,6 +33,10 @@ public class SettingsActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         super.onCreate(savedInstanceState);
+
+        Toolbar myToolbar = findViewById(R.id.toolbar_second);
+        setSupportActionBar(myToolbar);
+
         setContentView(R.layout.activity_settings);
         SwitchMaterial toggle = (SwitchMaterial) findViewById(R.id.switch1);
         toggle.setChecked(useDarkTheme);
@@ -59,5 +66,18 @@ public class SettingsActivity extends AppCompatActivity {
 
         startActivity(intent);
 
+    }
+
+    public void onDelete(View view) {
+        DataBaseManager db = new DataBaseManager();
+        db.clearDatabase();
+        TasksDatesFragment tasksDatesFragment = new TasksDatesFragment();
+        TaskFragment taskFragment = new TaskFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(tasksDatesFragment);
+        ft.remove(taskFragment);
+        Activity activity = MainActivity.activity;
+        activity.recreate();
+        finish();
     }
 }

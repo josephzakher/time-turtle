@@ -27,15 +27,16 @@ public class DataBaseManager {
         return instance;
     }
 
-    public void insertTask(Task task){
+    public void insertTask(Task task) {
         SQLiteDatabase db = databaseConnector.getWritableDatabase();
         ContentValues taskValues = new ContentValues();
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_DATE,task.getDate());
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_TIME,task.getTime());
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_NAME,task.getName());
-        taskValues.put( DataBaseContract.DataBaseEntry.COLUMN_NAME_DESCRIPTION,task.getDescription());
-        db.insert( DataBaseContract.DataBaseEntry.TABLE_NAME,null,taskValues);
+        taskValues.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_DATE, task.getDate());
+        taskValues.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_TIME, task.getTime());
+        taskValues.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_NAME, task.getName());
+        taskValues.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_DESCRIPTION, task.getDescription());
+        db.insert(DataBaseContract.DataBaseEntry.TABLE_NAME, null, taskValues);
     }
+
     public ArrayList<Task> getAllTasks() {
         String selectQuery = "SELECT * FROM TASK";
         SQLiteDatabase db = databaseConnector.getWritableDatabase();
@@ -59,8 +60,9 @@ public class DataBaseManager {
         }
         return tasks;
     }
+
     public ArrayList<Task> getTasksPerDay(String date) {
-        String selectQuery = "SELECT * FROM TASK WHERE DATE='"+date.trim()+"'";
+        String selectQuery = "SELECT * FROM TASK WHERE DATE='" + date.trim() + "'";
         SQLiteDatabase db = databaseConnector.getWritableDatabase();
         db.beginTransaction();
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -80,9 +82,10 @@ public class DataBaseManager {
         } finally {
             db.endTransaction();
         }
-        Log.d(TAG, "getTasksPerDay: "+tasks.toString());
+        Log.d(TAG, "getTasksPerDay: " + tasks.toString());
         return tasks;
     }
+
     public ArrayList<String> getAllTasksDates() {
         String selectQuery = "SELECT DISTINCT DATE FROM TASK";
         SQLiteDatabase db = databaseConnector.getWritableDatabase();
@@ -101,5 +104,11 @@ public class DataBaseManager {
             db.endTransaction();
         }
         return dates;
+    }
+
+    public void clearDatabase() {
+        SQLiteDatabase db = databaseConnector.getWritableDatabase();
+        String clearDBQuery = "DELETE FROM TASK";
+        db.execSQL(clearDBQuery);
     }
 }

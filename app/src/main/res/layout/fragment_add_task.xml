@@ -10,51 +10,67 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="5">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:fontFamily="Roboto"
-            android:textSize="25sp"
-            android:text="Add Task"
-            android:layout_weight="1"/>
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="start"
             android:fontFamily="Roboto"
-            android:textSize="25sp"
-            android:hint="Name"
+            android:textColor="?attr/colorOnSecondary"
+            android:textColorHint="?attr/colorOnSecondary"
+            android:layout_marginLeft="10sp"
+            android:layout_marginStart="10sp"
+            android:paddingVertical="20sp"
+            android:textSize="30sp"
+            android:hint="@string/task_name"
             android:layout_weight="1"/>
         <EditText
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="start"
             android:fontFamily="Roboto"
-            android:textSize="25sp"
-            android:hint="Description"
+            android:textColor="?attr/colorOnSecondary"
+            android:textColorHint="?attr/colorOnSecondary"
+            android:layout_marginLeft="10sp"
+            android:layout_marginStart="10sp"
+            android:paddingVertical="20sp"
+            android:textSize="30sp"
+            android:hint="@string/description"
             android:layout_weight="1"/>
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="3"
+            android:weightSum="2">
+        <Button
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:fontFamily="Roboto"
-            android:textSize="25sp"
-            android:hint="Date"
+            android:textSize="23sp"
+            android:layout_marginHorizontal="10sp"
+            android:paddingVertical="10sp"
+            android:hint="@string/select_date"
+            android:background="?attr/colorSecondaryVariant"
+            android:textColorHint="?attr/colorOnPrimary"
             android:layout_weight="1"/>
-        <TextView
+        <Button
             android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:fontFamily="Roboto"
-            android:textSize="25sp"
-            android:hint="Time"
+            android:layout_marginHorizontal="10sp"
+            android:paddingVertical="10sp"
+            android:textSize="23sp"
+            android:hint="@string/select_time"
+            android:background="?attr/colorSecondaryVariant"
+            android:textColorHint="?attr/colorOnPrimary"
             android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

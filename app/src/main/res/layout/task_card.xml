@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="125dp"
     android:layout_margin="16dp"
-    android:background="@color/white"
+    android:background="?attr/colorOnPrimary"
     app:cardCornerRadius="15dp"
     app:elevation="6dp">
 
@@ -22,7 +22,7 @@
             android:layout_marginEnd="16dp"
             android:hint="@string/_7_00"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#FF757575"
+            android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/icon" />
@@ -35,7 +35,7 @@
             android:layout_marginEnd="16dp"
             android:hint="@string/task_event"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toBottomOf="@+id/time"
             app:layout_constraintStart_toStartOf="parent"
              />
@@ -59,7 +59,7 @@
             android:layout_marginVertical="5dp"
             android:hint="@string/this_is_the_description_of_the_event"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textColor="#FF757575"
+            android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toBottomOf="@+id/task_text"
             app:layout_constraintStart_toStartOf="parent"
              />

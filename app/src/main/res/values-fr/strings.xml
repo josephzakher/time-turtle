@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Time Turtle</string>
+    <string name="task_event"> Tâche / Événement </string>
+    <string name="today"> Aujourd\'hui </string>
+    <string name="tomorrow"> Demain </string>
+    <string name="add"> Ajouter </string>
+    <string name="drawer_opened"> Tiroir ouvert </string>
+    <string name="drawer_closed"> Tiroir fermé </string>
+    <string name="action_share"> Exportation </string>
+    <string name="action_settings"> Réglages </string>
+    <string name="hello_blank_fragment"> Bonjour fragment vierge </string>
+    <string name="add_task"> Ajouter une tâche </string>
+    <string name="addTaskException"> Veuillez ajouter un nom et une date pour créer une nouvelle tâche </string>
+    <string name="addTaskSuccess"> Tâche ajoutée! </string>
+    <string name="this_is_the_description_of_the_event"> Ceci est la description de l\'événement </string>
+    <string name="_7_00">7:00</string>
+    <string name="_26">26</string>
+    <string name="home"> Accueil </string>
+    <string name="add_new_task"> Ajouter une nouvelle tâche </string>
+    <string name="settings"> Réglages </string>
+    <string name="delete_cache"> Supprimer le cache </string>
+    <string name="task_name">Nom de la tâche </string>
+    <string name="description"> Explication </string>
+    <string name="select_time"> Sélection de l\'heure </string>
+    <string name="select_date">Sélectionner une date</string>
+</resources>
+
+
+

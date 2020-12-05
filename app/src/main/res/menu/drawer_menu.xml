@@ -5,15 +5,12 @@
         android:id="@+id/nav_home"
         android:checked="false"
         android:icon="@drawable/ic_baseline_home"
-        android:title="Home"/>
-<!--        android:checked="true"-->
-
+        android:title="@string/home" />
 
     <item
         android:id="@+id/nav_add"
         android:checked="false"
         android:icon="@drawable/ic_baseline_add"
-        android:title="Add new event" />
-
+        android:title="@string/add_new_task" />
 
 </menu>
